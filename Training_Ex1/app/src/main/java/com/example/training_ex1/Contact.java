@@ -3,7 +3,7 @@ package com.example.training_ex1;
 import java.io.Serializable;
 
 /**
- * A class for each contact's information
+ * A class for contact's information
  */
 public class Contact implements Serializable {
 
@@ -12,6 +12,7 @@ public class Contact implements Serializable {
     private final String mail;
     private final String phoneNumber;
 
+    // TODO add image to constructors
     /**
      * Contact constructor
      * @param name the contact's name

@@ -16,9 +16,10 @@
         android:focusableInTouchMode="true"
         android:maxLines="1"
         android:textColor="#F3F3F3"
-        android:textSize="35sp"
+        android:textSize="33sp"
         android:padding="5dp"
-        android:textStyle="bold|italic"/>
+        android:textStyle="italic"
+        />
 
 
 </LinearLayout>

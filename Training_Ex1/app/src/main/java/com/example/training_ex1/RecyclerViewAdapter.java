@@ -5,71 +5,110 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
+/**
+ * RecyclerViewAdapter class for the MainActivity's RecyclerView
+ */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private final List<Contact> mData;
-    private final LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private final List<Contact> contactList;
+    private final LayoutInflater layoutInflater;
+    private ItemClickListener itemClickListener;
 
-    // data is passed into the constructor
-    RecyclerViewAdapter(Context context, List<Contact> data) {
-        this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
+    /**
+     * Initialize object
+     * @param context current context
+     * @param contactList a list of Contacts
+     */
+    RecyclerViewAdapter(Context context, List<Contact> contactList) {
+        this.layoutInflater = LayoutInflater.from(context);
+        this.contactList = contactList;
     }
 
-    // inflates the row layout from xml when needed
+    /**
+     * Inflates the row layout from xml when needed
+     * @param parent parent view
+     * @param viewType type
+     * @return new ViewHolder
+     */
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recycler_view, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = layoutInflater.inflate(R.layout.recycler_view, parent, false);
         return new ViewHolder(view);
     }
 
-    // binds the data to the TextView in each row
+    /**
+     * Binds the data to the TextView in each row
+     * @param holder current ViewHolder object
+     * @param position the ViewHolder's position
+     */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String name = mData.get(position).getName();
+        String name = contactList.get(holder.getAdapterPosition()).getName();
         holder.myTextView.setText(name);
     }
 
-    // total number of rows
+    /**
+     * @return total number of Contact
+     */
     @Override
     public int getItemCount() {
-        return mData.size();
+        return contactList.size();
     }
 
 
-    // stores and recycles views as they are scrolled off screen
+    /**
+     * Inner ViewHolder class. Stores and recycles views as they are scrolled off screen
+     */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myTextView;
 
+        /**
+         * Construct new ViewHolder
+         * @param itemView itemView
+         */
         ViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.ContactName);
             itemView.setOnClickListener(this);
         }
 
+        /**
+         * Activates onClickItem in case of a ViewHolder was clicked
+         * @param view current view
+         */
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (itemClickListener != null) itemClickListener.onContactClick(view, getAdapterPosition());
         }
     }
 
-    // convenience method for getting data at click position
-    Contact getItem(int id) {
-        return mData.get(id);
+
+    /**
+     * @param position current position of ViewHolder that was pressed
+     * @return Contact
+     */
+    Contact getItem(int position) {
+        return contactList.get(position);
     }
 
-    // allows clicks events to be caught
+
+    /**
+     * Allows clicks events to be caught
+     * @param itemClickListener ItemClickListener object
+     */
     void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
+        this.itemClickListener = itemClickListener;
     }
 
-    // parent activity will implement this method to respond to click events
+    /**
+     * Inner Interface for the MainActivity to implement in case of a Contact being pressed
+     */
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
+        void onContactClick(View view, int position);
     }
 }
