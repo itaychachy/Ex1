@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
         // data to populate the RecyclerView with
         ArrayList<Contact> names = new ArrayList<>();
-        names.add(new Contact("ItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokok", "itaychachy@gmail.com", "+972502673554"));
+        names.add(new Contact("ItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokokItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokokItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokokItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokok", "itaychachy@gmail.com", "+972502673554"));
         names.add(new Contact("Dan", "itaychachy@gmail.com", "+972502673554"));
         names.add(new Contact("Shahar", "itaychachy@gmail.com", "+972502673554"));
         names.add(new Contact("Yaron", "itaychachy@gmail.com", "+972502673554"));
