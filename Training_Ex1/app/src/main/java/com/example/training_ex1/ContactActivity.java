@@ -2,8 +2,16 @@ package com.example.training_ex1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ContactActivity extends AppCompatActivity {
 
@@ -19,11 +27,16 @@ public class ContactActivity extends AppCompatActivity {
         String phone = intent.getStringExtra(MainActivity.EXTRA_PHONE);
 
         // Capture the layout's TextView and set the string as its text
-        TextView nameTextView = findViewById(R.id.textView);
-        TextView mailTextView = findViewById(R.id.textView2);
-        TextView phoneTextView = findViewById(R.id.textView3);
-        nameTextView.setText(name);
-        mailTextView.setText(mail);
-        phoneTextView.setText(phone);
+        TextView firstTextView = findViewById(R.id.textView);
+        TextView secondTextView = findViewById(R.id.textView2);
+        TextView thirdTextView = findViewById(R.id.textView3);
+        firstTextView.setText(name);
+        if (mail != null){
+            secondTextView.setText(mail);
+            thirdTextView.setText(phone);
+        }
+        else{
+            secondTextView.setText(phone);
+        }
     }
 }

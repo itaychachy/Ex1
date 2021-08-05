@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -25,15 +24,15 @@
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="350dp"
+                android:layout_height="400dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:contentDescription="@string/contact_image"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/img" />
+                android:src="@drawable/img"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -65,6 +64,7 @@
                 android:layout_marginBottom="20dp"
                 android:textSize="20sp"
                 app:layout_constraintHorizontal_bias="0.0"/>
+
         </LinearLayout>
     </ScrollView>
 

@@ -11,12 +11,12 @@
         android:theme="@style/Theme.Training_Ex1">
         <activity
             android:name=".ContactActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

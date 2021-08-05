@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:backgroundTintMode="src_over"
+    android:orientation="horizontal"
+    android:padding="2dp">
+
+
+    <TextView
+        android:id="@+id/ContactName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#3F51B5"
+        android:focusableInTouchMode="true"
+        android:maxLines="1"
+        android:textColor="#F3F3F3"
+        android:textSize="35sp"
+        android:padding="5dp"
+        android:textStyle="bold|italic"/>
+
+
+</LinearLayout>

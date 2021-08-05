@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_contact.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29322916666666665" />
+        <entry key="app/src/main/res/layout/activity_temp.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/recycler_view.xml" value="0.7014248704663213" />
       </map>
     </option>

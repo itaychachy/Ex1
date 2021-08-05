@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public static final String EXTRA_NAME = "com.example.myfirstapp.NAME";
     public static final String EXTRA_MAIL = "com.example.myfirstapp.MAIL";
     public static final String EXTRA_PHONE = "com.example.myfirstapp.PHONE";
+    public static final String EXTRA_URL = "com.example.myfirstapp.URL";
 
 
     RecyclerViewAdapter adapter;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         // data to populate the RecyclerView with
         ArrayList<Contact> names = new ArrayList<>();
         names.add(new Contact("ItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokokItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokokItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokokItaykkkkItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokItaykkkkkkokokokkkokokok", "itaychachy@gmail.com", "+972502673554"));
-        names.add(new Contact("Dan", "itaychachy@gmail.com", "+972502673554"));
+        names.add(new Contact("Dan", "+972502673554"));
         names.add(new Contact("Shahar", "itaychachy@gmail.com", "+972502673554"));
         names.add(new Contact("Yaron", "itaychachy@gmail.com", "+972502673554"));
         names.add(new Contact("Elad", "itaychachy@gmail.com", "+972502673554"));
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         intent.putExtra(EXTRA_NAME, contact.getName());
         intent.putExtra(EXTRA_MAIL, contact.getMail());
         intent.putExtra(EXTRA_PHONE, contact.getPhoneNumber());
-
         startActivity(intent);
     }
 }

@@ -13,7 +13,7 @@ public class Contact implements Serializable {
     private final String phoneNumber;
 
     /**
-     * ContactData constructor
+     * Contact constructor
      * @param name the contact's name
      * @param mail - the contact's mail
      * @param phoneNumber - the contact's phone number
@@ -22,6 +22,17 @@ public class Contact implements Serializable {
         this.name = name;
         this.mail = mail;
         this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * Contact constructor, without mail parameter
+     * @param name the contact's name
+     * @param phoneNumber - the contact's phone number
+     */
+    public Contact(final String name, final String phoneNumber){
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.mail = null;
     }
 
     /**
