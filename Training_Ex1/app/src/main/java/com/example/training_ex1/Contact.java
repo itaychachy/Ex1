@@ -1,5 +1,7 @@
 package com.example.training_ex1;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -9,21 +11,9 @@ public class Contact implements Serializable {
 
     // Data
     private final String name;
-    private final String mail;
     private final String phoneNumber;
-
-    // TODO add image to constructors
-    /**
-     * Contact constructor
-     * @param name the contact's name
-     * @param mail - the contact's mail
-     * @param phoneNumber - the contact's phone number
-     */
-    public Contact(final String name, final String mail, final String phoneNumber){
-        this.name = name;
-        this.mail = mail;
-        this.phoneNumber = phoneNumber;
-    }
+    private String mail;
+    private Bitmap photo;
 
     /**
      * Contact constructor, without mail parameter
@@ -34,6 +24,7 @@ public class Contact implements Serializable {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.mail = null;
+        this.photo = null;
     }
 
     /**
@@ -56,4 +47,28 @@ public class Contact implements Serializable {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    /**
+     * @return contact's photo
+     */
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    /**
+     * Sets an image profile to the Contact
+     * @param photo contact's photo
+     */
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
+    }
+
+    /**
+     * Sets a mail Address to the Contact
+     * @param mailAddress contact's mail address
+     */
+    public void setMail(String mailAddress) {
+        this.mail = mailAddress;
+    }
+
 }
