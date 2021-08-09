@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/entryFragment">
+
+    <fragment
+        android:id="@+id/contactMenuFragment"
+        android:name="com.example.training_ex1.ContactMenuFragment"
+        android:label="fragment_contact_menu"
+        tools:layout="@layout/fragment_contact_menu" >
+        <action
+            android:id="@+id/action_contactMenuFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.example.training_ex1.ContactFragment"
+        android:label="fragment_contact"
+        tools:layout="@layout/fragment_contact">
+        <argument
+            android:name="contact"
+            app:argType="com.example.training_ex1.Contact"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/entryFragment"
+        android:name="com.example.training_ex1.EntryFragment"
+        android:label="fragment_entry"
+        tools:layout="@layout/fragment_entry" >
+        <action
+            android:id="@+id/action_entryFragment_to_contactMenuFragment"
+            app:destination="@id/contactMenuFragment" />
+    </fragment>
+</navigation>

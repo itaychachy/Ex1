@@ -9,11 +9,13 @@ import java.io.Serializable;
  */
 public class Contact implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     // Data
     private final String name;
     private final String phoneNumber;
     private String mail;
-    private Bitmap photo;
+    private Bitmap image;
 
     /**
      * Contact constructor, without mail parameter
@@ -24,7 +26,7 @@ public class Contact implements Serializable {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.mail = null;
-        this.photo = null;
+        this.image = null;
     }
 
     /**
@@ -51,16 +53,16 @@ public class Contact implements Serializable {
     /**
      * @return contact's photo
      */
-    public Bitmap getPhoto() {
-        return photo;
+    public Bitmap getImage() {
+        return image;
     }
 
     /**
      * Sets an image profile to the Contact
-     * @param photo contact's photo
+     * @param image contact's photo
      */
-    public void setPhoto(Bitmap photo) {
-        this.photo = photo;
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     /**

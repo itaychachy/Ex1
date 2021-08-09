@@ -87,7 +87,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-
     /**
      * @param position current position of ViewHolder that was pressed
      * @return Contact
@@ -95,7 +94,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Contact getItem(int position) {
         return contactList.get(position);
     }
-
 
     /**
      * Allows clicks events to be caught

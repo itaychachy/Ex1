@@ -11,10 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Training_Ex1">
         <activity
-            android:name=".ContactActivity"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
