@@ -43,10 +43,9 @@ public class EntryFragment extends Fragment {
     }
 
     public void handlePermission(View view){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if (requireActivity().getApplicationContext().checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+            requireActivity().getApplicationContext().checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
                 requireActivity().requestPermissions(new String[] {Manifest.permission.READ_CONTACTS}, CONTACTS_REQUEST_CODE);
-            }
         }
         else {
             enterContactsList();
@@ -57,21 +56,5 @@ public class EntryFragment extends Fragment {
         NavDirections action = EntryFragmentDirections.actionEntryFragmentToContactMenuFragment();
         Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment)).navigate(action);
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CONTACTS_REQUEST_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(requireContext(), PERMISSION_GRANTED, Toast.LENGTH_SHORT).show();
-                enterContactsList();
-            }
-            else{
-                Toast.makeText(requireContext(), PERMISSION_DENIED, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-
+    
 }

@@ -33,34 +33,22 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
     }
 
-    public void handlePermission(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if (getApplicationContext().checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
-                requestPermissions(new String[] {Manifest.permission.READ_CONTACTS}, CONTACTS_REQUEST_CODE);
-            }
-        }
-        else {
-            enterContactsList();
-        }
-    }
-
-    private void enterContactsList() {
-        NavDirections action = EntryFragmentDirections.actionEntryFragmentToContactMenuFragment();
-        Navigation.findNavController(findViewById(R.id.entryFragment)).navigate(action);
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CONTACTS_REQUEST_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == CONTACTS_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(MainActivity.this, PERMISSION_GRANTED, Toast.LENGTH_SHORT).show();
-                enterContactsList();
-            }
-            else{
+                navigateToContactMenuFragment();
+            } else {
                 Toast.makeText(MainActivity.this, PERMISSION_DENIED, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void navigateToContactMenuFragment(){
+        NavDirections action = EntryFragmentDirections.actionEntryFragmentToContactMenuFragment();
+        Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(action);
     }
 }
