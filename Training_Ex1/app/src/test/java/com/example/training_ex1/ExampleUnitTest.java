@@ -2,8 +2,7 @@ package com.example.training_ex1;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
+import static com.google.common.truth.Truth.*;
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -12,6 +11,6 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        assertThat(4).isEqualTo(2 + 2);
     }
 }
