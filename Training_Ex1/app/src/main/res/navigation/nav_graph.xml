@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/contactMenuFragment"
-        android:name="com.example.training_ex1.ContactMenuFragment"
+        android:name="com.example.training_ex1.ContactsMenuFragment"
         android:label="fragment_contact_menu"
-        tools:layout="@layout/fragment_contact_menu" >
+        tools:layout="@layout/fragment_contacts_menu" >
         <action
             android:id="@+id/action_contactMenuFragment_to_contactFragment"
             app:destination="@id/contactFragment" />

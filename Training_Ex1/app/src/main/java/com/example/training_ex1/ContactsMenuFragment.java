@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -20,17 +21,37 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
+ * A Fragment to display the contact menu on the MainActivity.
+ * Implements ItemClickListener
+ * @see RecyclerViewAdapter.ItemClickListener
+ * @author itaychachy
  */
-public class ContactMenuFragment extends Fragment implements RecyclerViewAdapter.ItemClickListener{
+public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapter.ItemClickListener{
 
     RecyclerViewAdapter adapter;
 
+    /**
+     * Instantiate this Fragment and sets it's recycler view according to the contacts on the device.
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container If non-null, this is the parent view that the fragment's UI should be
+     *                 attached to. The fragment should not add the view itself, but this can be
+     *                  used to generate the LayoutParams of the view. This value may be null.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous
+     *                          saved state as given here.
+     * @return Return the View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contact_menu, container, false);
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_contacts_menu, container, false);
+        setRecyclerView(view);
+        return view;
+    }
+
+    /*
+     * Set the fragment's recycler view to display the device's contacts
+     */
+    private void setRecyclerView(View view){
         ArrayList<Contact> contacts = getContactList();
         // set up the RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.rvContact);
@@ -38,16 +59,8 @@ public class ContactMenuFragment extends Fragment implements RecyclerViewAdapter
         adapter = new RecyclerViewAdapter(view.getContext(), contacts);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
-        return view;
     }
 
-
-    @Override
-    public void onContactClick(View view, int position) {
-        Contact contact = adapter.getItem(position);
-        NavDirections action = ContactMenuFragmentDirections.actionContactMenuFragmentToContactFragment().setContact(contact);
-        Navigation.findNavController(view).navigate(action);
-    }
 
     /*
      * Creates an array of Contacts from the.
@@ -98,5 +111,18 @@ public class ContactMenuFragment extends Fragment implements RecyclerViewAdapter
             cursor.close();
         }
         return contacts;
+    }
+
+    /**
+     * In case a contact was pressed, the fragment navigates to ContactFragment and sends it the
+     * contact's object
+     * @param view current view
+     * @param position the position of the contact that wea pressed
+     */
+    @Override
+    public void onContactClick(View view, int position) {
+        Contact contact = adapter.getItem(position);
+        NavDirections action = ContactsMenuFragmentDirections.actionContactMenuFragmentToContactFragment().setContact(contact);
+        Navigation.findNavController(view).navigate(action);
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * RecyclerViewAdapter class for the MainActivity's RecyclerView
+ * @author itaychachy
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 

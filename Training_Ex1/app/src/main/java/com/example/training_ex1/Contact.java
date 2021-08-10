@@ -1,24 +1,24 @@
 package com.example.training_ex1;
 
 import android.graphics.Bitmap;
-
+import org.jetbrains.annotations.Nullable;
 import java.io.Serializable;
 
 /**
- * A class for contact's information
+ * A class for contact's information. Serializable.
+ * @author itaychachy
  */
 public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Data
     private final String name;
     private final String phoneNumber;
     private String mail;
     private Bitmap image;
 
     /**
-     * Contact constructor, without mail parameter
+     * Contact constructor. Sets the mandatory name and phoneNumber fields.
      * @param name the contact's name
      * @param phoneNumber - the contact's phone number
      */
@@ -27,34 +27,6 @@ public class Contact implements Serializable {
         this.phoneNumber = phoneNumber;
         this.mail = null;
         this.image = null;
-    }
-
-    /**
-     * @return contact's name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @return contact's mail
-     */
-    public String getMail() {
-        return mail;
-    }
-
-    /**
-     * @return contact's phone number
-     */
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    /**
-     * @return contact's photo
-     */
-    public Bitmap getImage() {
-        return image;
     }
 
     /**
@@ -71,6 +43,37 @@ public class Contact implements Serializable {
      */
     public void setMail(String mailAddress) {
         this.mail = mailAddress;
+    }
+
+    /**
+     * @return contact's name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return contact's phone number
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+
+    /**
+     * @return contact's mail
+     */
+    @Nullable
+    public String getMail() {
+        return mail;
+    }
+
+    /**
+     * @return contact's photo
+     */
+    @Nullable
+    public Bitmap getImage() {
+        return image;
     }
 
 }

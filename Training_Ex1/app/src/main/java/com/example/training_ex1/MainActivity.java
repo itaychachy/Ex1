@@ -1,38 +1,48 @@
 package com.example.training_ex1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.widget.Toast;
 
 /**
- * Main Activity class to display contact's application home page
- * This activity holds a RecyclerView for each contact.
+ * Main Activity class for the contacts application.
+ * @author itaychachy
  */
 public class MainActivity extends AppCompatActivity{
 
-    private static final int CONTACTS_REQUEST_CODE = 1;
+    // Constants
+    public static final int CONTACTS_REQUEST_CODE = 1;
     private static final String PERMISSION_GRANTED = "Permission to contacts granted";
     private static final String PERMISSION_DENIED = "Permission denied. You must allow access to contacts in order to use the app";
 
 
     /**
-     * On create method. Set the home page and the adapter for the RecyclerView of this Activity
+     * On create method.
      * @param savedInstanceState saved instance
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
+
+    /**
+     * To read contacts permission. Display a message according to the user decision.
+     * In case a permission was granted, navigates to ContactMenuFragment.
+     * @param requestCode the request code
+     * @param permissions The requested permissions. Never null
+     * @param grantResults The grant results for the corresponding permissions
+     */
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -47,6 +57,9 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    /*
+     * Navigates to the ContactsMenuFragment
+     */
     private void navigateToContactMenuFragment(){
         NavDirections action = EntryFragmentDirections.actionEntryFragmentToContactMenuFragment();
         Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(action);
