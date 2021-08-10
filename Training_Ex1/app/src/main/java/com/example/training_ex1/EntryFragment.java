@@ -32,7 +32,7 @@ public class EntryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_entry, container, false);
+        final View view = inflater.inflate(R.layout.fragment_entry, container, false);
         setButton(view);
         return view;
     }
@@ -40,8 +40,8 @@ public class EntryFragment extends Fragment {
     /*
      * Set the button onClickListener in case of a click
      */
-    private void setButton(View view){
-        Button button = view.findViewById(R.id.button);
+    private void setButton(final View view){
+        final Button button = view.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +68,7 @@ public class EntryFragment extends Fragment {
      * Navigates to the ContactsMenuFragment
      */
     private void navigateToContactsMenuFragment() {
-        NavDirections action = EntryFragmentDirections.actionEntryFragmentToContactMenuFragment();
+        final NavDirections action = EntryFragmentDirections.actionEntryFragmentToContactMenuFragment();
         Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment)).navigate(action);
     }
 }

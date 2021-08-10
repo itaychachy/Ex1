@@ -43,7 +43,7 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contacts_menu, container, false);
+        final View view = inflater.inflate(R.layout.fragment_contacts_menu, container, false);
         setRecyclerView(view);
         return view;
     }
@@ -51,10 +51,10 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
     /*
      * Set the fragment's recycler view to display the device's contacts
      */
-    private void setRecyclerView(View view){
-        ArrayList<Contact> contacts = getContactList();
+    private void setRecyclerView(final View view){
+        final ArrayList<Contact> contacts = getContactList();
         // set up the RecyclerView
-        RecyclerView recyclerView = view.findViewById(R.id.rvContact);
+        final RecyclerView recyclerView = view.findViewById(R.id.rvContact);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new RecyclerViewAdapter(view.getContext(), contacts);
         adapter.setClickListener(this);
@@ -67,9 +67,9 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
      */
     @SuppressLint("Range")
     private ArrayList<Contact> getContactList() {
-        ArrayList<Contact> contacts = new ArrayList<>();
-        ContentResolver contentResolver = requireActivity().getContentResolver();
-        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
+        final ArrayList<Contact> contacts = new ArrayList<>();
+        final ContentResolver contentResolver = requireActivity().getContentResolver();
+        final Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
         Contact currentContact = null;
         String id = null, name = null, mail = null;
@@ -121,8 +121,8 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
      */
     @Override
     public void onContactClick(View view, int position) {
-        Contact contact = adapter.getItem(position);
-        NavDirections action = ContactsMenuFragmentDirections.actionContactMenuFragmentToContactFragment().setContact(contact);
+        final Contact contact = adapter.getItem(position);
+        final NavDirections action = ContactsMenuFragmentDirections.actionContactMenuFragmentToContactFragment().setContact(contact);
         Navigation.findNavController(view).navigate(action);
     }
 }

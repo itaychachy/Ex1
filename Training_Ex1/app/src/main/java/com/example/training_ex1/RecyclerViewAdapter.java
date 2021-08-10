@@ -38,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.recycler_view, parent, false);
+        final View view = layoutInflater.inflate(R.layout.recycler_view, parent, false);
         return new ViewHolder(view);
     }
 
@@ -49,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String name = contactList.get(holder.getAdapterPosition()).getName();
+        final String name = contactList.get(holder.getAdapterPosition()).getName();
         holder.myTextView.setText(name);
     }
 
@@ -66,13 +66,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * Inner ViewHolder class. Stores and recycles views as they are scrolled off screen
      */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        private final TextView myTextView;
 
         /**
          * Construct new ViewHolder
          * @param itemView itemView
          */
-        ViewHolder(View itemView) {
+        ViewHolder(final View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.ContactName);
             itemView.setOnClickListener(this);
@@ -100,7 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * Allows clicks events to be caught
      * @param itemClickListener ItemClickListener object
      */
-    void setClickListener(ItemClickListener itemClickListener) {
+    void setClickListener(final ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 

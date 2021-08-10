@@ -39,8 +39,8 @@ public class ContactFragment extends Fragment {
     /*
      * Set the fragment's view according to the contact that the fragment receives as an argument
      */
-    private void SetFragmentAccordingToContact(View view){
-        Contact contact = ContactFragmentArgs.fromBundle(requireArguments()).getContact();
+    private void SetFragmentAccordingToContact(final View view){
+        final Contact contact = ContactFragmentArgs.fromBundle(requireArguments()).getContact();
         if (contact != null){
             setName(view, contact);
             setPhoneNumberAndMain(view, contact);
@@ -51,9 +51,9 @@ public class ContactFragment extends Fragment {
     /*
      * Set the fragment's first text view to the contact's name
      */
-    private void setName(View view, Contact contact){
-        String name = contact.getName();
-        TextView nameTextView = view.findViewById(R.id.textView);
+    private void setName(final View view, final Contact contact){
+        final String name = contact.getName();
+        final TextView nameTextView = view.findViewById(R.id.textView);
         nameTextView.setText(name);
     }
 
@@ -62,11 +62,11 @@ public class ContactFragment extends Fragment {
      * In case the contact has a mail, the second text view display the mail and the third display
      * the phone number. Otherwise, the second text view display the phone number.
      */
-    private void setPhoneNumberAndMain(View view, Contact contact){
-        String mail = contact.getMail();
-        String phoneNumber = contact.getPhoneNumber();
-        TextView secondTextView = view.findViewById(R.id.textView2);
-        TextView thirdTextView = view.findViewById(R.id.textView3);
+    private void setPhoneNumberAndMain(final View view, final Contact contact){
+        final String mail = contact.getMail();
+        final String phoneNumber = contact.getPhoneNumber();
+        final TextView secondTextView = view.findViewById(R.id.textView2);
+        final TextView thirdTextView = view.findViewById(R.id.textView3);
         if (mail != null) { // Mail is optional
             secondTextView.setText(mail);
             thirdTextView.setText(phoneNumber);
@@ -79,9 +79,9 @@ public class ContactFragment extends Fragment {
      * Set the fragment's image view to the contact's image in case the contact has an image.
      * Otherwise, the image view stay with the default fragment's image.
      */
-    private void setImage(View view, Contact contact){
-        Bitmap image = contact.getImage();
-        ImageView imageView = view.findViewById(R.id.imageView);
+    private void setImage(final View view, final Contact contact){
+        final Bitmap image = contact.getImage();
+        final ImageView imageView = view.findViewById(R.id.imageView);
         if (image != null) { // else set to default photo
             imageView.setImageBitmap(image);
         }

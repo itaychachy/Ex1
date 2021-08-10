@@ -20,7 +20,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity{
 
     // Constants
-    public static final int CONTACTS_REQUEST_CODE = 1;
+    static final int CONTACTS_REQUEST_CODE = 1;
     private static final String PERMISSION_GRANTED = "Permission to contacts granted";
     private static final String PERMISSION_DENIED = "Permission denied. You must allow access to contacts in order to use the app";
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity{
      * Navigates to the ContactsMenuFragment
      */
     private void navigateToContactMenuFragment(){
-        NavDirections action = EntryFragmentDirections.actionEntryFragmentToContactMenuFragment();
+        final NavDirections action = EntryFragmentDirections.actionEntryFragmentToContactMenuFragment();
         Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(action);
     }
 }
