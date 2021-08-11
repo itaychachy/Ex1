@@ -39,6 +39,12 @@ public class EntryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_entry, container, false);
     }
 
+    /**
+     * Called after onCreateView. Sets the button.
+     * @param view The View returned by onCreateView
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous
+     *                           saved state as given here. This value may be null.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

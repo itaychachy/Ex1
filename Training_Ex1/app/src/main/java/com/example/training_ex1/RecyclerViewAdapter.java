@@ -6,13 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * RecyclerViewAdapter class for the MainActivity's RecyclerView
@@ -20,7 +15,7 @@ import java.util.Objects;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private final LiveData<ArrayList<Contact>> contactList;
+    private final ArrayList<Contact> contactList;
     private final LayoutInflater layoutInflater;
     private ItemClickListener itemClickListener;
 
@@ -29,7 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @param context current context
      * @param contactList a list of Contacts
      */
-    RecyclerViewAdapter(Context context, LiveData<ArrayList<Contact>> contactList) {
+    RecyclerViewAdapter(Context context, ArrayList<Contact> contactList) {
         this.layoutInflater = LayoutInflater.from(context);
         this.contactList = contactList;
     }
@@ -54,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final String name = Objects.requireNonNull(contactList.getValue()).get(holder.getAdapterPosition()).getName();
+        final String name = contactList.get(holder.getAdapterPosition()).getName();
         holder.myTextView.setText(name);
     }
 
@@ -63,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @Override
     public int getItemCount() {
-        return Objects.requireNonNull(contactList.getValue()).size();
+        return contactList.size();
     }
 
 
@@ -98,7 +93,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @return Contact
      */
     Contact getItem(int position) {
-        return Objects.requireNonNull(contactList.getValue()).get(position);
+        return contactList.get(position);
     }
 
     /**

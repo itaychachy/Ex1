@@ -1,32 +1,41 @@
 package com.example.training_ex1;
-import android.content.Context;
-import android.view.View;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-
 import java.util.ArrayList;
 
+/**
+ * ViewModel class that connects between the Fragments and the Contacts that are in the repository
+ */
 public class ContactsViewModel extends ViewModel {
 
-    private ContactsRepository repository = null;
+    private final ContactsRepository repository;
 
-    public LiveData<ArrayList<Contact>> getContactsList(Context context){
-        if (this.repository == null){
-            this.repository = new ContactsRepository(context);
-        }
+    /**
+     * Constructor. Sets the repository
+     */
+    public ContactsViewModel(){
+        this.repository = new ContactsRepository();
+    }
+
+    /**
+     * @return the contacts list
+     */
+    public ArrayList<Contact> getContactsList(){
         return this.repository.getContactsList();
     }
 
-    public void contactClicked(Contact contact, View view){
+    /**
+     * Alert the ViewModel of a contact that was clicked
+     * @param contact contact
+     */
+    public void contactClicked(Contact contact){
         this.repository.contactClicked(contact);
-        final NavDirections action = ContactsMenuFragmentDirections.actionContactMenuFragmentToContactFragment().setContact(contact);
-        Navigation.findNavController(view).navigate(action);
     }
 
-    public Contact getContact(){
-        return this.repository.getContact();
+    /**
+     * @return the contact that was clicked
+     */
+    public Contact getClickedContact(){
+        return this.repository.getClickedContact();
     }
 }

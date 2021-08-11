@@ -36,6 +36,12 @@ public class ContactFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_contact, container, false);
     }
 
+    /**
+     * Called after onCreateView. Sets the ViewModel.
+     * @param view The View returned by onCreateView
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous
+     *                           saved state as given here. This value may be null.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -47,7 +53,7 @@ public class ContactFragment extends Fragment {
      * Set the fragment's view according to the contact that the fragment receives as an argument
      */
     private void SetFragmentAccordingToContact(final View view){
-        final Contact contact = this.viewModel.getContact();
+        final Contact contact = this.viewModel.getClickedContact();
         if (contact != null){
             setName(view, contact);
             setPhoneNumberAndMain(view, contact);

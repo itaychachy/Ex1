@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -43,6 +42,12 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
         return inflater.inflate(R.layout.fragment_contacts_menu, container, false);
     }
 
+    /**
+     * Called after onCreateView. Sets the ViewModel.
+     * @param view The View returned by onCreateView
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous
+     *                           saved state as given here. This value may be null.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -54,7 +59,7 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
      * Set the fragment's recycler view to display the device's contacts
      */
     private void setRecyclerView(final View view){
-        final LiveData<ArrayList<Contact>> contacts = viewModel.getContactsList(requireActivity());
+        final ArrayList<Contact> contacts = viewModel.getContactsList();
         // set up the RecyclerView
         final RecyclerView recyclerView = view.findViewById(R.id.rvContact);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -64,14 +69,16 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
     }
 
     /**
-     * In case a contact was pressed, the fragment navigates to ContactFragment and sends it the
-     * contact's object
+     * In case a contact was pressed, the fragment alert the ViewModel about this event and
+     * navigates to ContactFragment and sends it the contact's object
      * @param view current view
      * @param position the position of the contact that wea pressed
      */
     @Override
     public void onContactClick(View view, int position) {
         final Contact contact = adapter.getItem(position);
-        this.viewModel.contactClicked(contact, view);
+        this.viewModel.contactClicked(contact);
+        final NavDirections action = ContactsMenuFragmentDirections.actionContactMenuFragmentToContactFragment().setContact(contact);
+        Navigation.findNavController(view).navigate(action);
     }
 }
