@@ -1,6 +1,8 @@
 package com.example.training_ex1;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -38,10 +40,14 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_contacts_menu, container, false);
+        return inflater.inflate(R.layout.fragment_contacts_menu, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         this.viewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
         setRecyclerView(view);
-        return view;
     }
 
     /*
@@ -66,8 +72,6 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
     @Override
     public void onContactClick(View view, int position) {
         final Contact contact = adapter.getItem(position);
-        this.viewModel.setContact(contact);
-        final NavDirections action = ContactsMenuFragmentDirections.actionContactMenuFragmentToContactFragment().setContact(contact);
-        Navigation.findNavController(view).navigate(action);
+        this.viewModel.contactClicked(contact, view);
     }
 }
