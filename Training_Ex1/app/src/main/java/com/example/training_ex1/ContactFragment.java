@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.TextView;
  */
 public class ContactFragment extends Fragment {
 
+    private ContactsViewModel viewModel;
 
     /**
      * Instantiate this Fragment and sets it's views according to the current Contact that was pressed.
@@ -32,6 +34,7 @@ public class ContactFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_contact, container, false);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
         SetFragmentAccordingToContact(view);
         return view;
     }
@@ -40,7 +43,7 @@ public class ContactFragment extends Fragment {
      * Set the fragment's view according to the contact that the fragment receives as an argument
      */
     private void SetFragmentAccordingToContact(final View view){
-        final Contact contact = ContactFragmentArgs.fromBundle(requireArguments()).getContact();
+        final Contact contact = this.viewModel.getContact();
         if (contact != null){
             setName(view, contact);
             setPhoneNumberAndMain(view, contact);

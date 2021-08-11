@@ -1,23 +1,17 @@
 package com.example.training_ex1;
 
-import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +22,8 @@ import java.util.ArrayList;
  */
 public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapter.ItemClickListener{
 
-    RecyclerViewAdapter adapter;
+    private RecyclerViewAdapter adapter;
+    private ContactsViewModel viewModel;
 
     /**
      * Instantiate this Fragment and sets it's recycler view according to the contacts on the device.
@@ -44,6 +39,7 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_contacts_menu, container, false);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
         setRecyclerView(view);
         return view;
     }
@@ -52,65 +48,13 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
      * Set the fragment's recycler view to display the device's contacts
      */
     private void setRecyclerView(final View view){
-        final ArrayList<Contact> contacts = getContactList();
+        final LiveData<ArrayList<Contact>> contacts = viewModel.getContactsList(requireActivity());
         // set up the RecyclerView
         final RecyclerView recyclerView = view.findViewById(R.id.rvContact);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new RecyclerViewAdapter(view.getContext(), contacts);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
-    }
-
-
-    /*
-     * Creates an array of Contacts from the.
-     */
-    @SuppressLint("Range")
-    private ArrayList<Contact> getContactList() {
-        final ArrayList<Contact> contacts = new ArrayList<>();
-        final ContentResolver contentResolver = requireActivity().getContentResolver();
-        final Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
-        Contact currentContact = null;
-        String id = null, name = null, mail = null;
-        Bitmap photo = null;
-        if ((cursor != null ? cursor.getCount() : 0) > 0) {
-            while (cursor.moveToNext()) {
-                id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                        new String[]{id}, null);
-                phoneCursor.moveToNext();
-                String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                Cursor mailCursor = contentResolver.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,
-                        null, ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
-                        new String[]{id}, null);
-                InputStream inputStream = ContactsContract.Contacts.openContactPhotoInputStream(requireActivity().getContentResolver(),
-                        ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, Long.parseLong(id)));
-
-                if (inputStream != null) {
-                    photo = BitmapFactory.decodeStream(inputStream);
-                }
-                currentContact = new Contact(name, phoneNumber);
-                if (mailCursor.moveToNext()){
-                    mail = mailCursor.getString(mailCursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
-                    currentContact.setMail(mail);
-                    mail = null;
-                }
-                if (photo != null){
-                    currentContact.setImage(photo);
-                    photo = null;
-                }
-                contacts.add(currentContact);
-                phoneCursor.close();
-                mailCursor.close();
-            }
-        }
-        if(cursor!=null){
-            cursor.close();
-        }
-        return contacts;
     }
 
     /**
@@ -122,6 +66,7 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
     @Override
     public void onContactClick(View view, int position) {
         final Contact contact = adapter.getItem(position);
+        this.viewModel.setContact(contact);
         final NavDirections action = ContactsMenuFragmentDirections.actionContactMenuFragmentToContactFragment().setContact(contact);
         Navigation.findNavController(view).navigate(action);
     }

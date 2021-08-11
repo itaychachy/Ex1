@@ -8,19 +8,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.*;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
+//@RunWith(RobolectricTestRunner.class)
 @Config(manifest = "AndroidManifest.xml")
-@RunWith(RobolectricTestRunner.class)
 public class EntryFragmentTest {
 
     private MainActivity activity;
-
-    @Test
-    public void temp(){
-        assertThat(5).isAtLeast(2);
-    }
-
 
     @Before
     public void setUp(){
@@ -40,22 +33,11 @@ public class EntryFragmentTest {
     }
 
     @Test
-    public void TestFragmentMargins(){
-        Button button = activity.findViewById(R.id.button);
-        int bottomMargin = ((FrameLayout.LayoutParams) button.getLayoutParams()).bottomMargin;
-        assertThat(bottomMargin).isEqualTo(0);
-        int topMargin = ((FrameLayout.LayoutParams) button.getLayoutParams()).topMargin;
-        assertThat(topMargin).isEqualTo(0);
-        int rightMargin = ((FrameLayout.LayoutParams) button.getLayoutParams()).rightMargin;
-        assertThat(rightMargin).isEqualTo(0);
-        int leftMargin = ((FrameLayout.LayoutParams) button.getLayoutParams()).leftMargin;
-        assertThat(leftMargin).isEqualTo(0);
-    }
-
-    @Test
     public void TestButtonText(){
         Button button = activity.findViewById(R.id.button);
+
         String buttonText = (String) button.getText();
-        assertThat(buttonText).matches("TO CONTACT LIST");
+
+        assertThat(buttonText).isEqualTo("TO CONTACT LIST");
     }
 }

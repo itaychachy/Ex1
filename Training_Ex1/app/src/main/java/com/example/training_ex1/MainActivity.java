@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity{
     private static final String PERMISSION_GRANTED = "Permission to contacts granted";
     private static final String PERMISSION_DENIED = "Permission denied. You must allow access to contacts in order to use the app";
 
-
     /**
      * On create method.
      * @param savedInstanceState saved instance
@@ -34,8 +33,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-
+    
     /**
      * To read contacts permission. Display a message according to the user decision.
      * In case a permission was granted, navigates to ContactMenuFragment.
