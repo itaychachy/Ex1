@@ -43,7 +43,7 @@ public class ContactsRepository {
         if(cursor != null){
             cursor.close();
         }
-        Collections.sort(contacts, (c1, c2) -> {return c1.getName().compareTo(c2.getName());});
+        Collections.sort(contacts, (c1, c2) -> c1.getName().compareTo(c2.getName()));
         return contacts;
     }
 
