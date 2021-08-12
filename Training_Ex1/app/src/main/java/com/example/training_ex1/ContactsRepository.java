@@ -12,20 +12,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Repository class that is responsible of loading the contacts from the devise
+ * Repository class that is responsible of loading and holding the contacts from the devise
  * @author itaychachy
  */
 public class ContactsRepository {
 
     private final ArrayList<Contact> contactsList;
-    private Contact contact;
 
     /**
      * ContactsRepository constructor. Loads all of the contacts from the user's device.
      */
     public ContactsRepository(){
         this.contactsList = loadAndSortsContacts();
-        this.contact = null;
     }
 
     /*
@@ -89,20 +87,5 @@ public class ContactsRepository {
      */
     public ArrayList<Contact> getContactsList(){
         return contactsList;
-    }
-
-    /**
-     * @return the contact that was clicked on
-     */
-    public Contact getClickedContact(){
-        return contact;
-    }
-
-    /**
-     * Alert the repository of a clicked contact
-     * @param contact Contact object
-     */
-    public void contactClicked(final Contact contact){
-        this.contact = contact;
     }
 }

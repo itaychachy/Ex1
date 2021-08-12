@@ -1,5 +1,6 @@
 package com.example.training_ex1;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 
@@ -9,12 +10,14 @@ import java.util.ArrayList;
 public class ContactsViewModel extends ViewModel {
 
     private final ContactsRepository repository;
+    final MutableLiveData<Contact> clickedContact;
 
     /**
      * Constructor. Sets the repository
      */
     public ContactsViewModel(){
         this.repository = new ContactsRepository();
+        this.clickedContact = new MutableLiveData<>();
     }
 
     /**
@@ -29,13 +32,6 @@ public class ContactsViewModel extends ViewModel {
      * @param contact contact
      */
     public void contactClicked(Contact contact){
-        this.repository.contactClicked(contact);
-    }
-
-    /**
-     * @return the contact that was clicked
-     */
-    public Contact getClickedContact(){
-        return this.repository.getClickedContact();
+        this.clickedContact.setValue(contact);
     }
 }
