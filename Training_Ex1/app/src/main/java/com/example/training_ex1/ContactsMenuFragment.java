@@ -51,7 +51,7 @@ public class ContactsMenuFragment extends Fragment implements RecyclerViewAdapte
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.viewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
+        this.viewModel = (ContactsViewModel) new ViewModelProvider(requireActivity(), new ViewModelFactory(new ContactsRepository())).get(ContactsViewModel.class);
         setRecyclerView(view);
     }
 

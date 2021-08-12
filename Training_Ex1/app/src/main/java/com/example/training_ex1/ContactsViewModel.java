@@ -13,10 +13,11 @@ public class ContactsViewModel extends ViewModel {
     final MutableLiveData<Contact> clickedContact;
 
     /**
-     * Constructor. Sets the repository
+     * ContactsViewModel's Constructor
+     * @param contactsRepository repository which the ViewModel is attached to
      */
-    public ContactsViewModel(){
-        this.repository = new ContactsRepository();
+    public ContactsViewModel(final ContactsRepository contactsRepository){
+        this.repository = contactsRepository;
         this.clickedContact = new MutableLiveData<>();
     }
 

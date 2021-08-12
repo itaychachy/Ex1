@@ -45,7 +45,7 @@ public class ContactFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final Observer<Contact> observer = contact -> SetFragmentAccordingToContact(view, contact);
-        final ContactsViewModel viewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
+        final ContactsViewModel viewModel = (ContactsViewModel) new ViewModelProvider(requireActivity(), new ViewModelFactory(new ContactsRepository())).get(ContactsViewModel.class);
         viewModel.clickedContact.observe(getViewLifecycleOwner(), observer);
     }
 
