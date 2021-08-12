@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 
 /**
- * ViewModel class that connects between the Fragments and the Contacts that are in the repository
+ * ViewModel class that connects between Fragment and the Contacts that are in the repository
  */
 public class ContactsViewModel extends ViewModel {
 
