@@ -21,7 +21,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     }
 
     /**
-     * Creates a new instance of the given Class.
+     * Creates a new instance of the given Class
      * @param modelClass a Class whose instance is requested
      * @return A newly created ViewModel
      */
