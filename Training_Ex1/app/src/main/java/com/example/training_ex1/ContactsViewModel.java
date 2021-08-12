@@ -28,7 +28,7 @@ public class ContactsViewModel extends ViewModel {
     }
 
     /**
-     * Alert the ViewModel of a contact that was clicked
+     * Alerts the ViewModel of a contact that was clicked
      * @param contact contact
      */
     public void contactClicked(Contact contact){
