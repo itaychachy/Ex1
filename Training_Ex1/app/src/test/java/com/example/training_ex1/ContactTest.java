@@ -22,7 +22,7 @@ public class ContactTest {
 
     @Before
     public void setUp(){
-        contact = new Contact("name", "123456");
+        contact = new Contact("name", "123456", "employee@lightricks.com", image);
         this.image = Mockito.mock(Bitmap.class);
     }
 
@@ -36,34 +36,24 @@ public class ContactTest {
 
     @Test
     public void testSetImage(){
-        assertThat(contact.getImage()).isNull();
 
         Mockito.when(image.getHeight()).thenReturn(123);
-        contact.setImage(image);
 
         assertThat(contact.getImage()).isNotNull();
         assertThat(contact.getImage()).isEqualTo(image);
         assertThat(contact.getImage().getHeight()).isEqualTo(123);
 
-        contact.setImage(null);
-        assertThat(contact.getImage()).isNull();
     }
 
     @Test
     public void testSetMail(){
-        assertThat(contact.getMail()).isNull();
 
         String mail = "employee@lightricks.com";
-        contact.setMail(mail);
-
         assertThat(contact.getMail()).isNotNull();
         assertThat(contact.getMail()).isEqualTo(mail);
 
         mail = "no_mail";
         assertThat(contact.getMail()).isNotEqualTo(mail);
-
-        contact.setMail(null);
-        assertThat(contact.getMail()).isNull();
     }
 
 }

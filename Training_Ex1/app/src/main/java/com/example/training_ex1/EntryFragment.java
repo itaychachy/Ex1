@@ -21,29 +21,13 @@ import android.widget.Button;
  */
 public class EntryFragment extends Fragment {
 
-    /**
-     * Instantiate this Fragment and sets it's button view.
-     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container If non-null, this is the parent view that the fragment's UI should be
-     *                 attached to. The fragment should not add the view itself, but this can be
-     *                  used to generate the LayoutParams of the view. This value may be null.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous
-     *                          saved state as given here.
-     * @return Return the View for the fragment's UI, or null.
-     */
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_entry, container, false);
     }
 
-    /**
-     * Called after onCreateView. Sets the button.
-     * @param view The View returned by onCreateView
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous
-     *                           saved state as given here. This value may be null.
-     */
-    @Override
+
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setButton(view);

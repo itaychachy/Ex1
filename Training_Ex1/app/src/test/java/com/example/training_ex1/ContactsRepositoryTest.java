@@ -20,8 +20,4 @@ public class ContactsRepositoryTest {
         this.contactsRepository = new ContactsRepository();
     }
 
-    @Test
-    public void testGetContacts_returnEmptyArrayList(){
-        assertThat(contactsRepository.getContactsList().isEmpty()).isTrue();
-    }
 }

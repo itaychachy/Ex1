@@ -19,34 +19,16 @@ import android.widget.TextView;
  */
 public class ContactFragment extends Fragment {
 
-    /**
-     * Instantiate this Fragment and sets it's views according to the current Contact that was pressed.
-     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container If non-null, this is the parent view that the fragment's UI should be
-     *                 attached to. The fragment should not add the view itself, but this can be
-     *                  used to generate the LayoutParams of the view. This value may be null.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous
-     *                          saved state as given here.
-     * @return Return the View for the fragment's UI, or null.
-     */
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_contact, container, false);
     }
 
-    /**
-     * Called after onCreateView. Sets the ViewModel.
-     * @param view The View returned by onCreateView
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous
-     *                           saved state as given here. This value may be null.
-     */
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final Observer<Contact> observer = contact -> SetFragmentAccordingToContact(view, contact);
-        final ContactsViewModel viewModel = (ContactsViewModel) new ViewModelProvider(requireActivity(), new ViewModelFactory(new ContactsRepository())).get(ContactsViewModel.class);
-        viewModel.clickedContact.observe(getViewLifecycleOwner(), observer);
+        final ContactsViewModel viewModel = new ViewModelProvider(requireActivity(), new ViewModelFactory(new ContactsRepository())).get(ContactsViewModel.class);
+        viewModel.observeClickedContact().observe(getViewLifecycleOwner(), observer);
     }
 
     /*

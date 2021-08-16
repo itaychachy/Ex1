@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * RecyclerViewAdapter class for the MainActivity's RecyclerView
  * @author itaychachy
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ContactViewHolder> {
 
     private final ArrayList<Contact> contactList;
     private final LayoutInflater layoutInflater;
@@ -24,7 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @param context current context
      * @param contactList a list of Contacts
      */
-    RecyclerViewAdapter(Context context, ArrayList<Contact> contactList) {
+    RecyclerViewAdapter(final Context context, final ArrayList<Contact> contactList) {
         this.layoutInflater = LayoutInflater.from(context);
         this.contactList = contactList;
     }
@@ -37,9 +37,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = layoutInflater.inflate(R.layout.recycler_view, parent, false);
-        return new ViewHolder(view);
+        return new ContactViewHolder(view);
     }
 
     /**
@@ -48,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @param position the ViewHolder's position
      */
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ContactViewHolder holder, int position) {
         final String name = contactList.get(holder.getAdapterPosition()).getName();
         holder.myTextView.setText(name);
     }
@@ -65,14 +65,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     /**
      * Inner ViewHolder class. Stores and recycles views as they are scrolled off screen
      */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView myTextView;
 
         /**
          * Construct new ViewHolder
          * @param itemView itemView
          */
-        ViewHolder(final View itemView) {
+        ContactViewHolder(final View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.ContactName);
             itemView.setOnClickListener(this);
@@ -84,22 +84,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
          */
         @Override
         public void onClick(View view) {
-            if (itemClickListener != null) itemClickListener.onContactClick(view, getAdapterPosition());
+            if (itemClickListener != null) itemClickListener.onContactClick(view, contactList.get(getAdapterPosition()));
         }
     }
 
-    /**
-     * @param position current position of ViewHolder that was pressed
-     * @return Contact
-     */
-    Contact getItem(int position) {
-        return contactList.get(position);
-    }
 
-    /**
-     * Allows clicks events to be caught
-     * @param itemClickListener ItemClickListener object
-     */
     void setClickListener(final ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
@@ -108,6 +97,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * Inner Interface for the MainActivity to implement in case of a Contact being pressed
      */
     public interface ItemClickListener {
-        void onContactClick(View view, int position);
+        void onContactClick(final View view, final Contact contact);
     }
 }

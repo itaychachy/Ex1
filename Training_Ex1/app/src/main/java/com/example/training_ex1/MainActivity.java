@@ -22,23 +22,12 @@ public class MainActivity extends AppCompatActivity{
     private static final String PERMISSION_GRANTED = "Permission to contacts granted";
     private static final String PERMISSION_DENIED = "Permission denied. You must allow access to contacts in order to use the app";
 
-    /**
-     * On create method.
-     * @param savedInstanceState saved instance
-     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    
-    /**
-     * To read contacts permission. Display a message according to the user decision.
-     * In case a permission was granted, navigates to ContactMenuFragment.
-     * @param requestCode the request code
-     * @param permissions The requested permissions. Never null
-     * @param grantResults The grant results for the corresponding permissions
-     */
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
